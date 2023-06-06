@@ -8,15 +8,8 @@ class BBCSpider(scrapy.Spider):
     allowed_domains = ["bbc.com"]
     start_urls = ["https://www.bbc.com"]
 
-    def remove_domain(self, urls):
-        cleaned_urls = []
-        for url in urls:
-            parsed_url = urlparse(url)
-            cleaned_urls.append(parsed_url.path)
-        return cleaned_urls
-
     def parse(self, response):
-        articles = self.remove_domain(response.css("a.media__link::attr(href)").getall())
+        articles = response.css("a.media__link::attr(href)").getall()
         tags = response.css("a.media__tag::text").getall()
         home_page_titles = [title.strip() if title else "" for title in response.css("a.media__link::text").getall()]
 

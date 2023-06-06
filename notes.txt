@@ -1,0 +1,15 @@
+<img src="https://ichef.bbc.co.uk/wwhp/800/cpsprodpb/18196/production/_130001789_613a8aa31728d7f6133e42c76b88eb364f629f85-1.jpg" class="image-replace" alt="Ukrainian artillery fires at enemy positions near Bakhmut, eastern Ukraine. File photo" data-src="https://ichef.bbc.co.uk/wwhp/{width}/cpsprodpb/18196/production/_130001789_613a8aa31728d7f6133e42c76b88eb364f629f85-1.jpg">
+
+<img src="https://ichef.bbc.co.uk/wwhp/400/cpsprodpb/162B0/production/_130000809_index-gettyimages-1322584346.jpg" class="image-replace" alt="Ben Roberts-Smith outside an Australian court" data-src="https://ichef.bbc.co.uk/wwhp/{width}/cpsprodpb/162B0/production/_130000809_index-gettyimages-1322584346.jpg">
+
+<img src="https://ichef.bbc.co.uk/wwhp/400/cpsprodpb/1769C/production/_130000959_mediaitem130000958.jpg" class="image-replace" alt="The AR headset dubbed Apple Vision Pro" data-src="https://ichef.bbc.co.uk/wwhp/{width}/cpsprodpb/1769C/production/_130000959_mediaitem130000958.jpg">
+
+<img src="https://ichef.bbc.co.uk/wwhp/400/ibroadcast/images/live/p0/fs/gh/p0fsghgs.jpg" class="image-replace" alt="Hands holding James Beard Award medal" data-src="https://ichef.bbc.co.uk/wwhp/{width}/ibroadcast/images/live/p0/fs/gh/p0fsghgs.jpg">
+
+
+response.css(".responsive-image .delayed-image-load ::attr(src)").getall(): 60
+response.css(".responsive-image ::attr(src)").getall() 66
+
+
+^(\.responsive-image)\W(\.delayed-image-load)\W(::attr\(src\))$
+^(\.responsive-image)\W(::attr\(src\))$
