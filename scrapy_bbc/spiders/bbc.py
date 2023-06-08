@@ -21,7 +21,8 @@ class BBCSpider(scrapy.Spider):
 
         home_page_titles = [title.strip() if title else "" for title in response.css("a.media__link::text").getall()]
 
-        for i, (article, home_page_title, tag) in enumerate(zip(articles, home_page_titles, tags)):
+        for article, home_page_title, tag in zip(articles, home_page_titles, tags):
+            print(f"ARTICLE: {article}")
             yield response.follow(
                 article,
                 callback=self.parse_article,
@@ -30,11 +31,15 @@ class BBCSpider(scrapy.Spider):
                     "tag": tag,
                 },
                 dont_filter=True,
-                cb_kwargs={"rank": i + 1},
             )
 
-    def parse_article(self, response, rank):
+    def parse_article(self, response):
+        """
+        Parse Articles Detail Page
+        """
+
         page_title = response.css("h1::text").get()
+        article_detail_page_image = response.css("meta[property='og:image']::attr(content)").get()
 
         if not page_title:
             page_title = response.css("#main-heading > span::text").get()
@@ -42,14 +47,14 @@ class BBCSpider(scrapy.Spider):
         home_page_title = response.meta["home_page_title"]
 
         data = {}
-        data["rank"] = rank
 
+        # If title on home page is different than the title on articles detail page, show both titles
         if page_title != home_page_title:
             data["home_page_title"] = home_page_title
 
         data_dict = {
             "page_title": page_title.strip() if page_title else "",
-            "image": "aniket",
+            "image": article_detail_page_image if "live" not in response.url else "LIVE PAGE",
             "url": response.url,
             "tag": response.meta["tag"],
         }
