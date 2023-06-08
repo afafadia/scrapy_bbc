@@ -22,7 +22,6 @@ class BBCSpider(scrapy.Spider):
         home_page_titles = [title.strip() if title else "" for title in response.css("a.media__link::text").getall()]
 
         for article, home_page_title, tag in zip(articles, home_page_titles, tags):
-            print(f"ARTICLE: {article}")
             yield response.follow(
                 article,
                 callback=self.parse_article,
