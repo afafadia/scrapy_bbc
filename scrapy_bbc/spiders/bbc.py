@@ -35,15 +35,15 @@ class BBCSpider(scrapy.Spider):
                 article,
                 callback=self.parse_article,
                 meta={
-                    "i": i,
                     "home_page_title": home_page_title,
                     "tag": tag,
                     "image": image,
                 },
                 dont_filter=True,
+                cb_kwargs={"rank": i + 1},
             )
 
-    def parse_article(self, response):
+    def parse_article(self, response, rank):
         page_title = response.css("h1::text").get()
 
         if not page_title:
@@ -52,7 +52,7 @@ class BBCSpider(scrapy.Spider):
         home_page_title = response.meta["home_page_title"]
 
         data = {}
-        data["i"] = response.meta["i"]
+        data["rank"] = rank
 
         if page_title != home_page_title:
             data["home_page_title"] = home_page_title
